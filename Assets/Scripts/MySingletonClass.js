@@ -23,10 +23,10 @@
 
 	private function MySingletonClass()
 	{
-    	if(Instance!=null)
-    	{
-        	Debug.Log("this a singleton class, use MySingletonInstance.GetInstance() instead");
-    	}
+    		if(Instance!=null)
+    		{
+        		Debug.Log("this a singleton class, use MySingletonInstance.GetInstance() instead");
+    		}
 	}
 
 }
