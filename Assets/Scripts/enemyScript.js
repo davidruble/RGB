@@ -10,8 +10,11 @@ var playerHit : boolean = false;							//has the zombie hit the player?
 var playerHitForceDuration : float = 0.2;					//duration for being flown backwards
 var forceAmount : float = 12.0;								//amount of force to be applied
 
+private var singletonReference : MySingletonClass;
+
 function Start()
 {
+    singletonReference = MySingletonClass.GetInstance();
 	agent = GetComponent.<NavMeshAgent>();					//accessing the AI nav mesh
 	sceneManager = GameObject.FindWithTag("Scene Manager");	//accessing the scene manager
 	player = GameObject.FindWithTag("Player");				//accessing the player
@@ -44,7 +47,7 @@ function OnCollisionEnter(collision : Collision)
 	{
 		//subtract lives from the player
 		Debug.Log("Hit the player");
-		sceneManager.GetComponent.<SceneManagerScript>().playerLives--;
+		singletonReference.playerLives--;
 		
 		playerHit = true;
 	}
