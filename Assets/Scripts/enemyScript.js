@@ -19,6 +19,8 @@ function Start()
 
 function Update () 
 {
+	//this is an additional test line to make it recompile
+	
 	agent.destination = player.transform.position;	//AI moving towards player
 	agent.speed = movementSpeed;					//how fast the AI moves
 	

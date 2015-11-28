@@ -12,21 +12,23 @@ var blood : Transform;					//blood effect
 var zombieDeathSound : AudioSource;		//sound effect for zombie death
 
 private var sceneManager : GameObject; 
+private var singletonReference : MySingletonClass;
 
 function Start()
 {
-	sceneManager = GameObject.FindWithTag("Scene Manager");
+    sceneManager = GameObject.FindWithTag("Scene Manager");
+    singletonReference = MySingletonClass.GetInstance();
 }
 
-function FixedUpdate () 
+function Update () 
 {
 	//Debug.Log(attackTimerStep);
 	
 	if (Input.GetMouseButton(leftMouse))
 	{
 		//play the attack animation and sound effect
-		animation.Play("Take 001");
-		audio.Play();
+		GetComponent.<Animation>().Play("Take 001");
+		GetComponent.<AudioSource>().Play();
 		attacking = true;
 	}
 	
@@ -48,7 +50,7 @@ function OnCollisionEnter(collision : Collision)
 {
 	if (attacking == true && collision.gameObject.CompareTag("Enemy"))
 	{	
-		sceneManager.GetComponent.<SceneManagerScript>().numEnemiesKilled++;
+		singletonReference.numEnemiesKilled++;
 		
 		//play blood sound and instantiate one and destroy enemy
 		hitSound.Play();

@@ -1,11 +1,10 @@
 ﻿#pragma strict
+import UnityEngine.UI;
 
 var initialRoomMusic : AudioSource;
 var redRoomMusic : AudioSource;
 var afterRedRoomMusic : AudioSource;
 
-var playerLives : int = 3;			//number of lives the player has
-var numEnemiesKilled : int = 0;
 var maxEnemies : int = 15;
 
 private var initialRoomIndex : int = 0;
@@ -18,20 +17,52 @@ private var afterBlueRoomIndex : int = 6;
 
 private var singletonReference : MySingletonClass;
 
-var player : GameObject;
+private var player : GameObject;
+
+var canvasText : Text;
+var healthText : Text;
+var enemiesText : Text;
+private var textDisplay : boolean;
+var textDisplayTimer : float = 5.0;
+private var textDisplayStep : float;
+private var INTERACT_STR : String = "Press 'E' to interact\nLeft mouse to attack with weapon";
+private var HEALTH_STR = "Health: ";
+private var ENEMIES_KO_STR = "Enemies killed: ";
+private var EMPTY_STR : String = "";
 
 function Awake()
 {
-	singletonReference = MySingletonClass.GetInstance();
+    singletonReference = MySingletonClass.GetInstance();
+    player = GameObject.FindWithTag("Player");
 }
 
 function Start()
 {	
-	player = GameObject.FindWithTag("Player");
+    if (singletonReference.initialRoom == true)
+        textDisplay = true;
+    
+    textDisplayStep = 0.0;
+    canvasText.text = EMPTY_STR;   
 }
 
 function Update () 
 {
+    healthText.text = HEALTH_STR + singletonReference.playerLives;
+    enemiesText.text = ENEMIES_KO_STR + singletonReference.numEnemiesKilled;
+
+    //display the gui text for a designated period of time at the start of a level
+    if (textDisplay)
+    {
+        canvasText.text = INTERACT_STR;
+        textDisplayStep += Time.deltaTime;
+    }
+    if (textDisplayStep > textDisplayTimer)
+    {
+        textDisplay = false;
+        canvasText.text = EMPTY_STR;
+        textDisplayStep = 0.0;
+    }
+
 	//check if the player went through the bottom of the map
 	if (player.transform.position.y < -10)
 	{
@@ -55,17 +86,15 @@ function Update ()
 			redRoomMusic.Play();
 		}
 		
-		Debug.Log("Num enemies killed: " + numEnemiesKilled);
-		
 		//restart the level
-		if(playerLives <= 0)
+		if(singletonReference.playerLives <= 0)
 		{
 			Application.LoadLevel(redRoomIndex);
 		}
 		
-		if(numEnemiesKilled >= 10)
+		if(singletonReference.numEnemiesKilled >= 10)
 		{
-			Debug.Log("You won! Door should be unlocked");
+			Debug.Log("Run! The door is unlocked!");
 		}
 	}
 	

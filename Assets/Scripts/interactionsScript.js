@@ -12,9 +12,9 @@ private var heldSword : GameObject;
 
 function Start()
 {
-	heldSword = GameObject.FindWithTag("Equipped Sword");
-	heldSword.active = false;
-	sceneManager = GameObject.FindWithTag("Scene Manager");
+    heldSword = GameObject.FindWithTag("Equipped Sword");
+    heldSword.SetActive(false);
+    sceneManager = GameObject.FindWithTag("Scene Manager");
 }
 
 function Update () 
@@ -27,13 +27,13 @@ function Update ()
 	if (doorHit)
 	{
 		doorTimerCount += Time.deltaTime;
-		Debug.Log(doorTimerCount);
+		//Debug.Log(doorTimerCount);
 	}
 	
 	//once the timer has run out
 	if (doorTimerCount >= doorTimer)
 	{
-		audio.Stop();				
+		GetComponent.<AudioSource>().Stop();				
 		
 		sceneManager.GetComponent.<SceneManagerScript>().LoadLevel();
 	}
@@ -46,21 +46,21 @@ function Update ()
 		for (var i = 0; i < hitColliders.Length; i++)
 		{
 			//if this something was the door
-			if (hitColliders[i].collider.tag == "Door")
+			if (hitColliders[i].GetComponent.<Collider>().tag == "Door")
 			{
 				Debug.Log("Door is hit.");
-				audio.Play();
+				GetComponent.<AudioSource>().Play();
 				doorHit = true;
 			}
 			//if this was the sword
-			else if (hitColliders[i].collider.tag == "Sword")
+			else if (hitColliders[i].GetComponent.<Collider>().tag == "Sword")
 			{
 				//"pick up" the sword and destroy the one on the ground
 				Debug.Log("Picked up sword");
-				heldSword.active = true;
-				Destroy(hitColliders[i].collider.gameObject);
+				heldSword.SetActive(true);
+				Destroy(hitColliders[i].GetComponent.<Collider>().gameObject);
 			}
-			else if (hitColliders[i].collider.tag == "Puzzle")
+			else if (hitColliders[i].GetComponent.<Collider>().tag == "Puzzle")
 			{
 				Debug.Log("Picked up a puzzle piece");
 				hitColliders[i].transform.parent = Camera.main.transform;
