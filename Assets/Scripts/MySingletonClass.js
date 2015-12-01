@@ -12,7 +12,8 @@
 	public static var blueRoom : boolean = false;
 	public static var afterBlueRoom : boolean = false;
 
-    public static var playerLives : int = 5;			//number of lives the player has
+    public static var MAX_LIVES : int = 5;
+    public static var playerLives : int = MAX_LIVES;			//number of lives the player has
     public static var numEnemiesKilled : int = 0;
 	
 	//creates new instance of the singleton

@@ -9,18 +9,23 @@ var doorHit : boolean = false;		//has the player interacted with the door?
 
 private var sceneManager : GameObject;
 private var heldSword : GameObject;
+private var singletonReference : MySingletonClass;
+private var charCtrl : CharacterController;
+
+private var ceilingCol : boolean = false;   //true when there hasbeen a ceiling collision
 
 function Start()
 {
+    singletonReference = MySingletonClass.GetInstance();
     heldSword = GameObject.FindWithTag("Equipped Sword");
-    heldSword.SetActive(false);
     sceneManager = GameObject.FindWithTag("Scene Manager");
+	charCtrl = GetComponent(CharacterController);
+    if (singletonReference.initialRoom || singletonReference.redRoom)
+        heldSword.SetActive(false);
 }
 
 function Update () 
 {
-	//stuff for sphere cast
-	var charCtrl : CharacterController = GetComponent(CharacterController);
 	var p1 : Vector3 = transform.position + charCtrl.center;
 	
 	//timer for when player interacts with door -- alotted time for sound to play
@@ -68,5 +73,20 @@ function Update ()
 			}
 		}
 	}
-}
 
+    //prevent character from getting stuck when jumping
+/*	if ((charCtrl.collisionFlags & CollisionFlags.Above) != 0)
+	{
+	    var hitVelocity : Vector3 = charCtrl.velocity;
+	    ceilingCol = true;
+	    HandleCeilingCollisions(hitVelocity);
+	    //Debug.Log("Hit ceiling");
+	}*/
+}
+/*function HandleCeilingCollisions(hitVelocity : Vector3)
+{
+    if (!charCtrl.isGrounded)
+        charCtrl.Move(Vector3.Reflect(hitVelocity, Vector3.up) * Time.deltaTime);
+    else
+        ceilingCol = false;
+}*/

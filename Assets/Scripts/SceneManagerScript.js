@@ -89,6 +89,7 @@ function Update ()
 		//restart the level
 		if(singletonReference.playerLives <= 0)
 		{
+		    singletonReference.playerLives = singletonReference.MAX_LIVES;
 			Application.LoadLevel(redRoomIndex);
 		}
 		
