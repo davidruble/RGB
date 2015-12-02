@@ -4,6 +4,10 @@ import UnityEngine.UI;
 var initialRoomMusic : AudioSource;
 var redRoomMusic : AudioSource;
 var afterRedRoomMusic : AudioSource;
+var greenRoomMusic : AudioSource;
+var afterGreenRoomMusic : AudioSource;
+var blueRoomMusic : AudioSource;
+var afterBlueRoomMusic : AudioSource;
 
 var maxEnemies : int = 15;
 
@@ -79,7 +83,7 @@ function Update ()
 	}
 	
 	//handles red room stuff
-	if (singletonReference.redRoom == true)
+	else if (singletonReference.redRoom == true)
 	{
 		if (!redRoomMusic.isPlaying)
 		{
@@ -95,42 +99,54 @@ function Update ()
 		
 		if(singletonReference.numEnemiesKilled >= 10)
 		{
-			Debug.Log("Run! The door is unlocked!");
+			//Debug.Log("Run! The door is unlocked!");
 		}
 	}
 	
 	//handles after red room stuff
-	if (singletonReference.afterRedRoom == true)
+	else if (singletonReference.afterRedRoom == true)
 	{
 		if (!afterRedRoomMusic.isPlaying)
 		{
 			afterRedRoomMusic.Play();
 		}
-		print ("completed red room");
+		//print ("completed red room");
 	}
 	
 	//handles green room stuff
-	if (singletonReference.greenRoom == true)
+	else if (singletonReference.greenRoom == true)
 	{
-		
+	    if (!greenRoomMusic.isPlaying)
+	    {
+	        greenRoomMusic.Play();
+	    }	
 	}
 	
 	//handles after green room stuff
-	if (singletonReference.afterGreenRoom == true)
+	else if (singletonReference.afterGreenRoom == true)
 	{
-		
+	    if (!afterGreenRoomMusic.isPlaying)
+	    {
+	        afterGreenRoomMusic.Play();
+	    }	
 	}
 	
 	//handles blue room stuff
-	if (singletonReference.blueRoom == true)
+	else if (singletonReference.blueRoom == true)
 	{
-		
+	    if (!blueRoomMusic.isPlaying)
+	    {
+	        blueRoomMusic.Play();
+	    }	
 	}
 	
 	//handles after blue room stuff
-	if (singletonReference.afterBlueRoom == true)
+	else if (singletonReference.afterBlueRoom == true)
 	{
-		
+	    if (!afterBlueRoomMusic.isPlaying)
+	    {
+	        afterBlueRoomMusic.Play();
+	    }	
 	}
 	
 	
@@ -182,42 +198,42 @@ function OnLevelWasLoaded(level : int)
 {
 	if (level == redRoomIndex)
 	{
-		print("red room loaded");
+		//print("red room loaded");
 		
 		singletonReference.redRoom = true;
 		singletonReference.initialRoom = false;
 	}
 	if (level == afterRedRoomIndex)
 	{
-		print("after red room loaded");
+		//print("after red room loaded");
 		
 		singletonReference.afterRedRoom = true;
 		singletonReference.redRoom = false;
 	}
 	if (level == greenRoomIndex)
 	{
-		print("green room loaded");
+		//print("green room loaded");
 		
 		singletonReference.greenRoom = true;
 		singletonReference.afterRedRoom = false;
 	}
 	if (level == afterGreenRoomIndex)
 	{
-		print("after green room loaded");
+		//print("after green room loaded");
 		
 		singletonReference.afterGreenRoom = true;
 		singletonReference.greenRoom = false;
 	}
 	if (level == blueRoomIndex)
 	{
-		print("blue room loaded");
+		//print("blue room loaded");
 		
 		singletonReference.blueRoom = true;
 		singletonReference.afterGreenRoom = false;
 	}
 	if (level == afterBlueRoomIndex)
 	{
-		print("after blue room loaded");
+		//print("after blue room loaded");
 		
 		singletonReference.afterBlueRoom = true;
 		singletonReference.blueRoom = false;
