@@ -5,15 +5,15 @@ public class LightSwitchScript : MonoBehaviour {
 	public GameObject chooser;
 
 	private bool lightOn = false;
-	private Light light;
+	private Light roomLight;
 
-	public int blueRoom = 3;
+	public int blueRoom = 5;
 
 	// Use this for initialization
 	void Start ()
 	{
-		light = gameObject.GetComponentInChildren<Light> ();
-		light.enabled = false;
+		roomLight = gameObject.GetComponentInChildren<Light> ();
+		roomLight.enabled = false;
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -22,11 +22,12 @@ public class LightSwitchScript : MonoBehaviour {
 		{
 			if (!lightOn)
 			{
-				light.enabled = true;
+				roomLight.enabled = true;
 			}
 		} 
 		else 
 		{
+            Debug.Log("Failed");
 			Application.LoadLevel(blueRoom);
 		}
 	}

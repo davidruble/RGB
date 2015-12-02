@@ -8,8 +8,8 @@
     public static var redRoom : boolean = false;
 	public static var afterRedRoom : boolean = false;
 	public static var greenRoom : boolean = false;
-	public static var afterGreenRoom : boolean = true;
-	public static var blueRoom : boolean = false;
+	public static var afterGreenRoom : boolean = false;
+	public static var blueRoom : boolean = true;
 	public static var afterBlueRoom : boolean = false;
 
     public static var MAX_LIVES : int = 5;
