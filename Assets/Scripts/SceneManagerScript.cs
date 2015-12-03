@@ -3,13 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SceneManagerScript : MonoBehaviour {
-    public AudioSource initialRoomMusic;
-    public AudioSource redRoomMusic;
-    public AudioSource afterRedRoomMusic;
-    public AudioSource greenRoomMusic;
-    public AudioSource afterGreenRoomMusic;
-    public AudioSource blueRoomMusic;
-    public AudioSource afterBlueRoomMusic;
+    public AudioSource hitSound;
 
     public int maxEnemies = 15;
     public float textDisplayTimer = 5.0f;
@@ -81,21 +75,11 @@ public class SceneManagerScript : MonoBehaviour {
         {
             if (terrain != null)
                 terrain.drawTreesAndFoliage = false;
-
-            if (!initialRoomMusic.isPlaying)
-            {
-                initialRoomMusic.Play();
-            }
         }
 
         //handles red room stuff
         else if (Singleton.Instance.redRoom == true)
         {
-            if (!redRoomMusic.isPlaying)
-            {
-                redRoomMusic.Play();
-            }
-
             //restart the level
             if (Singleton.Instance.playerLives <= 0)
             {
@@ -115,20 +99,12 @@ public class SceneManagerScript : MonoBehaviour {
             if (terrain != null)
                 terrain.drawTreesAndFoliage = false;
 
-            if (!afterRedRoomMusic.isPlaying)
-            {
-                afterRedRoomMusic.Play();
-            }
             //print ("completed red room");
         }
 
         //handles green room stuff
         else if (Singleton.Instance.greenRoom == true)
         {
-            if (!greenRoomMusic.isPlaying)
-            {
-                greenRoomMusic.Play();
-            }
         }
 
         //handles after green room stuff
@@ -136,20 +112,11 @@ public class SceneManagerScript : MonoBehaviour {
         {
             if (terrain != null)
                 terrain.drawTreesAndFoliage = true;
-
-            if (!afterGreenRoomMusic.isPlaying)
-            {
-                afterGreenRoomMusic.Play();
-            }
         }
 
         //handles blue room stuff
         else if (Singleton.Instance.blueRoom == true)
         {
-            if (!blueRoomMusic.isPlaying)
-            {
-                blueRoomMusic.Play();
-            }
         }
 
         //handles after blue room stuff
@@ -157,11 +124,6 @@ public class SceneManagerScript : MonoBehaviour {
         {
             if (terrain != null)
                 terrain.drawTreesAndFoliage = true;
-
-            if (!afterBlueRoomMusic.isPlaying)
-            {
-                afterBlueRoomMusic.Play();
-            }
         }
     }
 

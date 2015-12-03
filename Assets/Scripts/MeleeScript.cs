@@ -24,6 +24,8 @@ public class MeleeScript : MonoBehaviour {
         //Debug.Log(attackTimerStep);
         if (Input.GetMouseButton(leftMouse) && equippedSword != null)
         {
+            GetComponent<Rigidbody>().detectCollisions = true; 
+
             //play the attack animation and sound effect
             equippedSword.GetComponent<Animation>().Play("Take 001");
             GetComponent<AudioSource>().Play();
@@ -67,6 +69,11 @@ public class MeleeScript : MonoBehaviour {
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * thrust, ForceMode.Impulse);
                 attacking = false;
             }
+        }
+        //make sure nothing is interacted with unless explicitly attacking
+        else
+        {
+            GetComponent<Rigidbody>().detectCollisions = false; 
         }
     }
 

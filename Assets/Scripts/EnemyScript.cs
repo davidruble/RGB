@@ -9,11 +9,13 @@ public class EnemyScript : MonoBehaviour {
 
     private NavMeshAgent agent;                     //agent for AI 
     private GameObject player;					    //the player object being manipulated
+    private GameObject sceneManager;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();       //accessing the AI nav mesh
         player = GameObject.FindWithTag("Player");  //accessing the player
+        sceneManager = GameObject.FindWithTag("Scene Manager");
     }
 
     void Update()
@@ -39,6 +41,9 @@ public class EnemyScript : MonoBehaviour {
         //colliding with the player
         if (collision.gameObject.CompareTag("Player"))
         {
+            //if (!sceneManager.GetComponent<SceneManagerScript>().hitSound.isPlaying)
+                sceneManager.GetComponent<SceneManagerScript>().hitSound.Play();
+
             //subtract lives from the player
             Debug.Log("Hit the player");
             Singleton.Instance.playerLives--;
