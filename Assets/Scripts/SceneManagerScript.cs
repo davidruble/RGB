@@ -27,7 +27,7 @@ public class SceneManagerScript : MonoBehaviour {
     private bool textDisplay = false;
     private float textDisplayStep = 0.0f;
 
-    private const string END_STR = "The End\nFeel free to explore the world";
+    private const string END_STR = "The End\n\nThank you for playing!\nFeel free to explore the world";
     private const string HEALTH_STR = "Health: ";
     //private const string ENEMIES_KO_STR = "Enemies killed: ";
     private const string EMPTY_STR = "";
