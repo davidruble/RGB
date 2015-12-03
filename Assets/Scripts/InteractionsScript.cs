@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (AudioSource))]
 public class InteractionsScript : MonoBehaviour {
     public float reachDistance = 2.5f;	//how far the raycast goes -- for opening doors
     public float doorTimer = 0.5f;		//how long is allowed for the door sound effect to play
@@ -19,7 +18,7 @@ public class InteractionsScript : MonoBehaviour {
         heldSword = GameObject.FindWithTag("Equipped Sword");
         sceneManager = GameObject.FindWithTag("Scene Manager");
         //charCtrl = this.GetComponent<CharacterController>();
-        if (Singleton.Instance.initialRoom || Singleton.Instance.redRoom)
+        if (Singleton.Instance.beforeRedRoom || Singleton.Instance.redRoom)
             heldSword.SetActive(false);
     }
 
@@ -42,6 +41,7 @@ public class InteractionsScript : MonoBehaviour {
             sceneManager.GetComponent<SceneManagerScript>().LoadLevel();
         }
 
+        //interaction
         if (Input.GetKeyDown(KeyCode.E))
         {
             //if something has been hit within the raycast's limits
@@ -53,7 +53,7 @@ public class InteractionsScript : MonoBehaviour {
                 if (hitColliders[i].GetComponent<Collider>().tag == "Door")
                 {
                     //Debug.Log("Door is hit.");
-                    GetComponent<AudioSource >().Play();
+                    GetComponent<AudioSource>().Play();
                     doorHit = true;
                 }
                 //if this was the sword

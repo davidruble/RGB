@@ -18,7 +18,7 @@ public class Chooser : MonoBehaviour {
 		{
 			ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f));
 			
-			if (Physics.Raycast(ray, out hit, 1f) && hit.collider.tag == "Choice")
+			if (Physics.Raycast(ray, out hit, 1.5f) && hit.collider.tag == "Choice")
 			{
 				RiddleChoice choice = hit.collider.gameObject.GetComponent<RiddleChoice>();
 

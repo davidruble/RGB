@@ -4,7 +4,7 @@ using System.Collections;
 public class FinalWall : MonoBehaviour {
     public GameObject chooser;
     public GameObject sceneManager;
-    public int blueRoomIndex = 5;
+    public int blueRoomIndex = 7;
 
 	// Use this for initialization
 	void Start () {

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Singleton : MonoBehaviour {
-	public bool initialRoom = true;
+    public bool beforeRedRoom = true;
     public bool redRoom = false;
 	public bool afterRedRoom = false;
 	public bool greenRoom = false;

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent (typeof (AudioSource))]
 public class SceneManagerScript : MonoBehaviour {
     public AudioSource hitSound;
 
@@ -10,15 +11,15 @@ public class SceneManagerScript : MonoBehaviour {
 
     public Text canvasText;
     public Text healthText;
-    public Text enemiesText;
+  //  public Text enemiesText;
 
-    private int initialRoomIndex = 0;
-    private int redRoomIndex = 1;
-    private int afterRedRoomIndex = 2;
-    private int greenRoomIndex = 3;
-    private int afterGreenRoomIndex = 4;
-    private int blueRoomIndex = 5;
-    private int afterBlueRoomIndex = 6;
+    private int beforeRedRoomIndex = 2;
+    private int redRoomIndex = 3;
+    private int afterRedRoomIndex = 4;
+    private int greenRoomIndex = 5;
+    private int afterGreenRoomIndex = 6;
+    private int blueRoomIndex = 7;
+    private int afterBlueRoomIndex = 8;
 
     private GameObject player;
     private Terrain terrain;
@@ -26,9 +27,9 @@ public class SceneManagerScript : MonoBehaviour {
     private bool textDisplay = false;
     private float textDisplayStep = 0.0f;
 
-    private const string INTERACT_STR = "Press 'E' to interact\nLeft mouse to attack with weapon";
+    private const string END_STR = "The End\nFeel free to explore the world";
     private const string HEALTH_STR = "Health: ";
-    private const string ENEMIES_KO_STR = "Enemies killed: ";
+    //private const string ENEMIES_KO_STR = "Enemies killed: ";
     private const string EMPTY_STR = "";
 
     void Awake()
@@ -39,7 +40,7 @@ public class SceneManagerScript : MonoBehaviour {
 
     void Start()
     {
-        if (Singleton.Instance.initialRoom == true)
+        if (Singleton.Instance.afterBlueRoom == true)
             textDisplay = true;
 
         textDisplayStep = 0.0f;
@@ -49,12 +50,12 @@ public class SceneManagerScript : MonoBehaviour {
     void Update()
     {
         healthText.text = HEALTH_STR + Singleton.Instance.playerLives;
-        enemiesText.text = ENEMIES_KO_STR + Singleton.Instance.numEnemiesKilled;
+       // enemiesText.text = ENEMIES_KO_STR + Singleton.Instance.numEnemiesKilled;
 
         //display the gui text for a designated period of time at the start of a level
         if (textDisplay)
         {
-            canvasText.text = INTERACT_STR;
+            canvasText.text = END_STR;
             textDisplayStep += Time.deltaTime;
         }
         if (textDisplayStep > textDisplayTimer)
@@ -71,7 +72,7 @@ public class SceneManagerScript : MonoBehaviour {
         }
 
         //handles initial room stuff
-        if (Singleton.Instance.initialRoom == true)
+        if (Singleton.Instance.beforeRedRoom == true)
         {
             if (terrain != null)
                 terrain.drawTreesAndFoliage = false;
@@ -130,10 +131,10 @@ public class SceneManagerScript : MonoBehaviour {
     //sets conditions for the next level as the level is being loaded
     public void LoadLevel()
     {
-        if (Singleton.Instance.initialRoom == true)
+        if (Singleton.Instance.beforeRedRoom == true)
         {
             Singleton.Instance.redRoom = true;
-            Singleton.Instance.initialRoom = false;
+            Singleton.Instance.beforeRedRoom = false;
             Application.LoadLevel(redRoomIndex);        //load the next level
         }
         else if (Singleton.Instance.redRoom == true)
@@ -175,7 +176,7 @@ public class SceneManagerScript : MonoBehaviour {
             //print("red room loaded");
 
             Singleton.Instance.redRoom = true;
-            Singleton.Instance.initialRoom = false;
+            Singleton.Instance.beforeRedRoom = false;
         }
         if (level == afterRedRoomIndex)
         {

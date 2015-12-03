@@ -40,7 +40,7 @@ public class MusicPlayerScript : MonoBehaviour {
 	void Update ()
     {
         //handles initial room stuff
-        if (Singleton.Instance.initialRoom == true)
+        if (Singleton.Instance.beforeRedRoom == true)
         {
             if (!initialRoomMusic.isPlaying)
             {

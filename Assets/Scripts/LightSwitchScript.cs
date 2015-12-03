@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LightSwitchScript : MonoBehaviour {
 	public GameObject chooser;
-	public int blueRoom = 5;
+	public int blueRoom = 7;
 
 	private bool lightOn = false;
 	private Light roomLight;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (AudioSource))]
 public class MeleeScript : MonoBehaviour {
     public float attackTimer = 0.458f;		//length of attack animation
     public float attackTimerStep = 0.0f;	//timer up to length of attack animation
