@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Singleton : MonoBehaviour {
-	public bool initialRoom = false;
+	public bool initialRoom = true;
     public bool redRoom = false;
 	public bool afterRedRoom = false;
 	public bool greenRoom = false;
-	public bool afterGreenRoom = true;
+	public bool afterGreenRoom = false;
 	public bool blueRoom = false;
 	public bool afterBlueRoom = false;
 
