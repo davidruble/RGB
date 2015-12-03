@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Chooser : MonoBehaviour {
+	public bool failed = false;
+
 	private Ray ray;
 	private RaycastHit hit;
-
-	public bool failed = false;
 	
 	// Use this for initialization
 	void Start () {

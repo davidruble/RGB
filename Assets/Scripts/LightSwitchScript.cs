@@ -3,32 +3,35 @@ using System.Collections;
 
 public class LightSwitchScript : MonoBehaviour {
 	public GameObject chooser;
+	public int blueRoom = 5;
 
 	private bool lightOn = false;
 	private Light roomLight;
 
-	public int blueRoom = 5;
-
 	// Use this for initialization
 	void Start ()
 	{
-		roomLight = gameObject.GetComponentInChildren<Light> ();
+        roomLight = gameObject.GetComponentInChildren<Light> ();
 		roomLight.enabled = false;
 	}
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if (!chooser.GetComponent<Chooser>().failed)
-		{
-			if (!lightOn)
-			{
-				roomLight.enabled = true;
-			}
-		} 
-		else 
-		{
-            Debug.Log("Failed");
-			Application.LoadLevel(blueRoom);
-		}
+        //don't turn on the lights for the sword, only the character
+        if (!(collider.gameObject.tag == "Equipped Sword"))
+        {
+            if (!chooser.GetComponent<Chooser>().failed)
+            {
+                if (!lightOn)
+                {
+                    roomLight.enabled = true;
+                }
+            }
+            else
+            {
+                Debug.Log("Failed");
+                Application.LoadLevel(blueRoom);
+            }
+        }
 	}
 }
